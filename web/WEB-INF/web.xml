@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns="http://xmlns.jcp.org/xml/ns/javaee"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd"
+         version="4.0">
+
+    <!--给用户模块加上访问地址-->
+    <servlet>
+        <servlet-name>UserServlet</servlet-name>
+        <servlet-class>com.atguigu.web.UserServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>UserServlet</servlet-name>
+        <url-pattern>/userServlet</url-pattern>
+    </servlet-mapping>
+
+    <!--给图书加上访问地址-->
+    <servlet>
+        <servlet-name>BookServlet</servlet-name>
+        <servlet-class>com.atguigu.web.BookServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>BookServlet</servlet-name>
+        <url-pattern>/manager/bookServlet</url-pattern>
+    </servlet-mapping>
+
+    <!--给图书加上访问地址-->
+    <servlet>
+        <servlet-name>ClientBookServlet</servlet-name>
+        <servlet-class>com.atguigu.web.ClientBookServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>ClientBookServlet</servlet-name>
+        <url-pattern>/client/bookServlet</url-pattern>
+    </servlet-mapping>
+
+    <!--给验证码加上访问地址-->
+    <servlet>
+        <servlet-name>KaptchaServlet</servlet-name>
+        <servlet-class>com.google.code.kaptcha.servlet.KaptchaServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>KaptchaServlet</servlet-name>
+        <url-pattern>/Kaptcha.jpg</url-pattern>
+    </servlet-mapping>
+
+    <!--给购物车加上访问地址-->
+    <servlet>
+        <servlet-name>CartServlet</servlet-name>
+        <servlet-class>com.atguigu.web.CartServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>CartServlet</servlet-name>
+        <url-pattern>/cartServlet</url-pattern>
+    </servlet-mapping>
+
+    <!--给订单加上访问地址-->
+    <servlet>
+        <servlet-name>OrderServlet</servlet-name>
+        <servlet-class>com.atguigu.web.OrderServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>OrderServlet</servlet-name>
+        <url-pattern>/orderServlet</url-pattern>
+    </servlet-mapping>
+
+    <!--给后台管理加上过滤器-->
+    <filter>
+        <filter-name>ManagerFilter</filter-name>
+        <filter-class>com.atguigu.filter.ManagerFilter</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>ManagerFilter</filter-name>
+        <url-pattern>/pages/manager/*</url-pattern>
+        <url-pattern>/manager/bookServlet</url-pattern>
+    </filter-mapping>
+
+    <!--给所有的service方法加上过滤器-->
+    <filter>
+        <filter-name>TransactionFilter</filter-name>
+        <filter-class>com.atguigu.filter.TransactionFilter</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>TransactionFilter</filter-name>
+        <!--当前工程下所有请求-->
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>
+
+    <!--配置服务器出错自动跳转的页面-->
+    <error-page>
+        <!--错误类型-->
+        <error-code>500</error-code>
+        <!--跳转去的页面路径-->
+        <location>/pages/error/error500.jsp</location>
+    </error-page>
+    <error-page>
+        <!--错误类型-->
+        <error-code>404</error-code>
+        <!--跳转去的页面路径-->
+        <location>/pages/error/error404.jsp</location>
+    </error-page>
+
+</web-app>
